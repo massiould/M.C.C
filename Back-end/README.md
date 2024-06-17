@@ -5,7 +5,7 @@
 The first thing to do is to clone the repository:
 
 ```sh
-$ git clone git@github.com:massiould/MCC.git
+$ git clone git@github.com:massiould/M.C.C.git
 ```
 
 Create a virtual environment to install dependencies in and activate it:

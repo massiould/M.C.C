@@ -1,37 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <!-- <LoginView/> -->
-  <RouterView /> 
   <div id="app">
-
+    <Header />
+    <router-view></router-view>
+    <Footer />
   </div>
 </template>
 
 <script>
-
-import Header from './components/Layout/Header/Header.vue';
-import Footer from './components/Layout/Footer/Footer.vue';
+import Header from './components/Layout/Header.vue';
+import Footer from './components/Layout/Footer.vue';
 
 export default {
   name: 'App',
   components: {
-    //HelloWorld,
-    // LoginView
     Header,
     Footer
-
   }
 }
 </script>
 
 <style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+router-view {
+  flex: 1;
+  padding-bottom: 60px; /* To make room for the fixed footer */
 }
 </style>

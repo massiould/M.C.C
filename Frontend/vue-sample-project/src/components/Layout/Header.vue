@@ -1,47 +1,48 @@
 <template>
-  <header>
-    <nav>
-      <ul>
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/login">Login</router-link></li>
-        <li><router-link to="/signup">Signup</router-link></li>
-      </ul>
-    </nav>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">MesChersConfrères</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Veille juridique</a></li>
+          <li><a href="#">Postulation</a></li>
+          <li><a href="#">Question Pratique</a></li>
+          <li><a href="#">Question</a></li>
+          <li><a href="#" class="btn">Mon Compte</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 </template>
 
-<script>
-export default {
-  name: 'Header'
-}
-</script>
-
 <style scoped>
-header {
-  background-color: #333;
-  color: white;
-  padding: 10px 0;
+.header {
+  background: #fff;
+  border-bottom: 1px solid #ccc;
 }
-
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.logo {
+  font-size: 24px;
+  color: #007bff;
+}
 nav ul {
   list-style: none;
   display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
+  gap: 20px;
 }
-
-nav ul li {
-  margin: 0 15px;
-}
-
 nav ul li a {
-  color: white;
   text-decoration: none;
-  font-weight: bold;
+  color: #333;
 }
-
-nav ul li a:hover {
-  text-decoration: underline;
+nav ul li a.btn {
+  background: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
 }
 </style>

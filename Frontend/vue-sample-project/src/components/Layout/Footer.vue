@@ -1,23 +1,16 @@
 <template>
-  <footer>
-    <p>&copy; 2024 My Application</p>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 MesChersConfrères. All rights reserved.</p>
+    </div>
   </footer>
 </template>
 
-<script>
-export default {
-  name: 'Footer'
-}
-</script>
-
 <style scoped>
-footer {
-  background-color: #333;
-  color: white;
+.footer {
+  background: #333;
+  color: #fff;
+  padding: 20px 0;
   text-align: center;
-  padding: 10px 0;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
 }
 </style>

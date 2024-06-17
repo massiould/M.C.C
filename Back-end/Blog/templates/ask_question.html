@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poser une question</title>
+    {% load static %}
+
+<link rel="stylesheet" href="{% static 'ask_question.css' %}">
+</head>
+<body>
+    <h1>Poser une question</h1>
+    <form id="questionForm" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Poser la question</button>
+    </form>
+</body>
+</html>

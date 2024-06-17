@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de la question</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ question.title }}</h1>
+        <p>{{ question.content }}</p>
+        
+        <!-- Afficher les réponses récupérées à partir de l'API -->
+        <div class="responses">
+            <h2>Réponses :</h2>
+            {% for answer in answers %}
+                <div class="response">
+                    <p>{{ answer.content }}</p>
+                    <p>Par : {{ answer.author.username }}</p>
+                    <p>Upvotes: {{ answer.votes }}</p>
+                    <!-- Ajouter des boutons pour voter sur la réponse -->
+                    <form method="post" action="{% url 'response_vote' response_id=answer.id vote_type='U' %}">
+                        {% csrf_token %}
+                        <button type="submit">Upvote</button>
+                    </form>
+                    <form method="post" action="{% url 'response_vote' response_id=answer.id vote_type='D' %}">
+                        {% csrf_token %}
+                        <button type="submit">Downvote</button>
+                    </form>
+                </div>
+                <hr>
+            {% empty %}
+                <p>Aucune réponse pour le moment.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Formulaire pour ajouter une réponse -->
+        <div class="add-response">
+            <h2>Ajouter une réponse :</h2>
+            <form method="post" action="{% url 'create_response' question_id=question.id %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Envoyer la réponse</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

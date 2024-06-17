@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .logout-btn {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .sidebar {
+    background-color: #333; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    width: 200px; /* Largeur de la bande latérale */
+    height: 100%; /* Hauteur de la bande latérale */
+    position: fixed; /* Position fixe pour rester à gauche de l'écran */
+    left: 0; /* Position à gauche de l'écran */
+    top: 80px; /* Position basse à 80 pixels du haut de la page */
+    padding: 20px; /* Espacement intérieur */
+    font-family: Arial, sans-serif; /* Police de caractères */
+}
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 150px; /* Réduit la largeur de la bande latérale sur les écrans plus petits */
+        padding: 15px; /* Réduit l'espacement intérieur */
+    }
+}
+.sidebar h2 {
+    margin-bottom: 20px; /* Espacement sous les titres */
+}
+.content {
+    margin-left: 220px; /* Espacement à gauche pour éviter le chevauchement avec la bande latérale */
+}
+
+
+.sidebar ul {
+    list-style: none; /* Supprime les puces de la liste */
+    padding: 0;
+}
+
+.sidebar a {
+    display: block; /* Affiche les liens en bloc pour prendre toute la largeur */
+    color: #fff; /* Couleur du texte */
+    text-decoration: none; /* Supprime les soulignements */
+    margin-bottom: 10px; /* Espacement entre les liens */
+    transition: color 0.3s; /* Transition pour l'effet hover */
+}
+
+.sidebar a:hover {
+    color: #ffd700; /* Couleur du texte au survol */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome!</h1>
+        {% if request.user.is_authenticated %}
+            <div>
+                <p>{{ request.user.username }}</p>
+                <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            </div>
+        {% else %}
+            <div>
+                <a href="{% url 'login' %}" class="login-btn">Login</a>
+                <a href="{% url 'signup' %}" class="signup-btn">Signup</a>
+            </div>
+        {% endif %}
+    </header>
+    <div class="sidebar">
+        
+        <ul>
+            <li><a href="#">Acceuil</a></li>
+            <li><a href="#">Question Pratique</a></li>
+            <li><a href="#">Question</a></li>
+            <li><a href="#">Postulation</a></li>
+            <!-- Ajoute d'autres boutons selon tes besoins -->
+        </ul>
+    </div>
+    <div class="content">
+        <!-- Votre contenu ici -->
+    </div>
+</body>
+</html>

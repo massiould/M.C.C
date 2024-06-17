@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choisir une catégorie</title>
+</head>
+<body>
+    <h1>Choisir une catégorie</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ category_form.as_p }}
+        <button type="submit">Continuer</button>
+    </form>
+</body>
+</html>
+

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choisir un type</title>
+</head>
+<body>
+    <h1>Choisir un type</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ type_form.as_p }}
+        <button type="submit">Continuer</button>
+    </form>
+</body>
+</html>

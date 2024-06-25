@@ -1,115 +1,89 @@
 <template>
-  <form name="login-form">
-    <div class="mb-3">
-      <label for="username">Username: </label>
-      <input type="text" id="username" v-model="input.username" />
-    </div>
-    <div class="mb-3">
-      <label for="password">Password: </label>
-      <input type="password" id="password" v-model="input.password" />
-    </div>
-    <button class="btn btn-outline-dark" type="submit" v-on:click.prevent="login">
-      Login
-    </button>
-  </form>
-  <h3>Output: {{ output }}</h3>
+  <div class="login">
+    <h2>Login</h2>
+    <form @submit.prevent="login">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" v-model="form.username" required />
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" v-model="form.password" required />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <p v-if="error">{{ error }}</p>
+  </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { SET_AUTHENTICATION, SET_USERNAME } from "../store/storeconstants";
 
 export default {
-  name: 'LoginView',
   data() {
     return {
-      input: {
-        username: "",
-        password: ""
+      form: {
+        username: '',
+        password: ''
       },
-      output: "",
-    }
+      error: ''
+    };
   },
-  
   methods: {
     async login() {
       try {
-        console.log("massi*******************************************************************")
-        const response = await axios.post('http://localhost:8000/api/login/', {
-          username: this.input.username,
-          password: this.input.password
-        });
-        console.log(response)
-        console.log("massi*******************************************************************")
+        const response = await axios.post('http://localhost:8000/api/login/', this.form);
         if (response.status === 200) {
-          this.output = response.data.message;
-          this.$store.commit(`auth/${SET_AUTHENTICATION}`, true);
-          this.$store.commit(`auth/${SET_USERNAME}`, this.input.username);
-          this.$router.push('/home');
+          this.$store.dispatch('login', { username: this.form.username });
+          this.$router.push(this.$route.query.redirect || '/home');
         }
       } catch (error) {
-        this.output = error.response.data.message || 'Error during authentication';
-        this.$store.commit(`auth/${SET_AUTHENTICATION}`, false);
+        this.error = error.response.data.message || 'An error occurred during login';
       }
-    },
-  },
-}
+    }
+  }
+};
 </script>
 
 <style scoped>
-/* Style for form container *//* Style for form container */
-.form-container {
+.login {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for form labels */
-label {
+.login h2 {
+  margin-bottom: 20px;
+}
+
+.login form div {
+  margin-bottom: 10px;
+}
+
+.login form label {
   display: block;
   margin-bottom: 5px;
-  color: #333;
-  text-align: left;
-  font-size: 16px;
-  font-weight: 500;
 }
 
-/* Style for form inputs */
-input[type="text"],
-input[type="password"] {
-  width: calc(100% - 20px);
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-}
-
-/* Style for submit button */
-button[type="submit"] {
+.login form input {
   width: 100%;
-  padding: 12px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.login button {
+  padding: 10px 15px;
+  background: #333;
+  color: white;
   border: none;
-  border-radius: 3px;
-  background-color: #0073b1; /* LinkedIn Blue */
-  color: #fff;
-  font-weight: bold;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 14px;
 }
 
-button[type="submit"]:hover {
-  background-color: #005a8d; /* Darker Blue */
-}
-
-/* Style for output message */
-.output-message {
-  margin-top: 10px;
-  font-weight: bold;
-  color: #333;
+.login p {
+  color: red;
 }
 </style>
